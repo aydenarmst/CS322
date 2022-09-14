@@ -19,7 +19,7 @@ def index():
     return render_template('index.html', title="Smile Portal", posts=posts.all())
 
 
-@bp_routes.route('/postsmile/', methods=['GET', 'POST'])
+@bp_routes.route('/postsmile', methods=['GET', 'POST'])
 def postsmile():
     pform = PostForm()
     if pform.validate_on_submit():
