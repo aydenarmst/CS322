@@ -6,21 +6,30 @@
 
     {% if form %}
 
-        <form action="" method="post">
+        <form action="" method="POST">
             {{ form.hidden_tag() }}
             <div>
-                <!--Displays the form item for the post's `title`.--> 
-                {{ form.title.label }}<br>
-                {{ form.title(class="formtitle") }}<br>
+  
+                <p>{{ form.title.label }}</p><br>
+                <p>{{ form.title(class="textinput") }}</p><br>
                 <!-- TODO: (milestone 1) Display the error messages of the `title` field validator (if there are any validation errors).   -->  
+                {% for error in form.title.errors %}
+                <span style = "color: red">[{{ error }}]</span>
+                {% endfor  %}
+
 
                 <!-- TODO: (milestone1) Include the form item for the post's `body`. Apply appropriate styling for the `body`form  item.  -->  
-
+                <p>{{ form.body.label }}</p><br>
+                <p>{{ form.body(class="textinput") }}</p><br>
                 <!-- TODO: (milestone 1) Display the error messages of the `body` field validator (if there are any validation errors).   -->  
+                {% for error in form.body.errors %}
+                <span style = "color: red">[{{ error }}]</span>
+                {% endfor  %}
             </div>
             
             <!-- TODO: (milestone1) Include the form item for `happiness_level` selection. Apply appropriate styling for the `happiness_level` form item.  -->  
-
+                <p>{{ form.happiness_level.label }}</p><br>
+                <p>{{ form.happiness_level(class="textinput") }}</p><br>
             <!-- TODO: (milestone2) Include the form item for `tag` selection.   -->  
 
             {{ form.submit(class="button") }}

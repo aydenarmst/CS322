@@ -17,3 +17,16 @@ bp_routes.template_folder = Config.TEMPLATE_FOLDER #'..\\View\\templates'
 def index():
     posts = Post.query.order_by(Post.timestamp.desc())
     return render_template('index.html', title="Smile Portal", posts=posts.all())
+
+
+@bp_routes.route('/postsmile/', methods=['GET', 'POST'])
+def postsmile():
+    pform = PostForm()
+    if pform.validate_on_submit():
+        newPost = Post(title = pform.title.data, body = pform.body.data, happiness_level = pform.happiness_level.data)
+        db.session.add(newPost)
+        db.session.commit()
+        flash("Title " + newPost.title + " is created")
+        return redirect(url_for('routes.index'))
+
+    return render_template('create.html', form=pform)
