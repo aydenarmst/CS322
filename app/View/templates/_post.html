@@ -6,13 +6,20 @@
         <tr>
             <td width="10%" >
                 <!--  (milestone1) TODO: include happiness-level image according to the `cost`s happiness_level .
-                For example : <img src="{{ url_for('static', filename = 'img//happiness-level-1.png' )}}"-->  
-
+                For example : <img src="{{ url_for('static', filename = 'img//happiness-level-1.png' )}}"--> 
+                {% if post.happiness_level == 3 %} 
+                    <img src="{{ url_for('static', filename = 'img//happiness-level-3.png' ) }}"></img>
+                {% elif post.happiness_level == 2 %} 
+                    <img src="{{ url_for('static', filename = 'img//happiness-level-2.png' ) }}"></img>
+                {% elif post.happiness_level == 1 %} 
+                    <img src="{{ url_for('static', filename = 'img//happiness-level-1.png' ) }}"></img>
+                {% endif %}
             </td>
 
             <td width="80%" >
                 <div>
                   <!-- (milestone1) TODO: include post body -->    
+                  {{post.body}}
                </div>
                <div> 
                   <!-- (milestone3) TODO: format the timestamp; display as local date/time-->
@@ -25,9 +32,11 @@
                     <!-- (milestone1)  TODO: add "like" button
                                        Define an HTML `post` form with a submit button. The form action should redirect to `routes.like` route.
                                        Style the submit button using `likebtn` CCS class selector. -->
+
                                        
                     <br>
                     <!-- (milestone1) TODO: include the likes count-->
+                    {{post.likes}}
                     
                 </div>
                 <br> 
