@@ -16,7 +16,7 @@ bp_routes.template_folder = Config.TEMPLATE_FOLDER #'..\\View\\templates'
 @bp_routes.route('/index', methods=['GET'])
 def index():
     posts = Post.query.order_by(Post.timestamp.desc())
-    return render_template('index.html', title="Smile Portal", posts=posts.all())
+    return render_template('index.html', title="Smile Portal", postCount = posts.count(), posts=posts.all())
 
 
 @bp_routes.route('/postsmile/', methods=['GET', 'POST'])
@@ -28,5 +28,13 @@ def postsmile():
         db.session.commit()
         flash("Title " + newPost.title + " is created")
         return redirect(url_for('routes.index'))
-
     return render_template('create.html', form=pform)
+
+
+@bp_routes.route('/like/<post_id>', methods=['POST'])
+def likePost(post_id):
+    incrementLikes = Post.query.filter_by(id = post_id).first()
+    incrementLikes.likes += 1
+    db.session.add(incrementLikes)
+    db.session.commit()
+    return redirect(url_for('routes.index'))
