@@ -116,9 +116,14 @@ a:hover {
 }
 
 .formselect {
-    background-color: lightcyan;
     font-size: 13px;
     padding: 2px;
+}
+
+.tagselect{
+    font-size: 13px;
+    padding: 2px;
+    padding-left: 40px;
 }
 
 .postlist{
