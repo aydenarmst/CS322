@@ -126,6 +126,13 @@ a:hover {
     padding-left: 40px;
 }
 
+.tagitem{
+    border: solid 1px;
+    padding: 4px;
+    background-color: white;
+    margin: 5px;
+}
+
 .postlist{
     display: flex;
     flex-wrap: wrap;

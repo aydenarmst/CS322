@@ -45,7 +45,7 @@ class Tag(db.Model):
 
 
     def __repr__(self):
-        return self.name
+        return '<ID: {} - Name: {}>'.format(self.id, self.name)
 
 
 
