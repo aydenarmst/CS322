@@ -38,3 +38,4 @@ def likePost(post_id):
     db.session.add(incrementLikes)
     db.session.commit()
     return redirect(url_for('routes.index'))
+
