@@ -22,7 +22,7 @@ class Post(db.Model):
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     likes = db.Column(db.Integer, default = 0)
     happiness_level = db.Column(db.Integer, default = 3)
-    
+
     tags = db.relationship(
         'Tag', 
         secondary = postTags,
@@ -34,7 +34,7 @@ class Post(db.Model):
         return '<Post {}>'.format(self.body)
 
     def get_tags(self):
-        return self.tags.all()
+        return self.tags
 
 
 
@@ -45,7 +45,7 @@ class Tag(db.Model):
 
 
     def __repr__(self):
-        return '<Tag: {} - name: {}>'.format(self.id, self.name)
+        return '<{} - {}>'.format(self.id, self.name)
 
 
 

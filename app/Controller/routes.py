@@ -5,7 +5,7 @@ from flask import render_template, flash, redirect, url_for, request
 from config import Config
 
 from app import db
-from app.Model.models import Post
+from app.Model.models import Post, Tag, postTags
 from app.Controller.forms import PostForm
 
 bp_routes = Blueprint('routes', __name__)
@@ -40,16 +40,6 @@ def likePost(post_id):
     return redirect(url_for('routes.index'))
 
 
-@bp_routes.route('/tag/<tag_id>', methods=['POST'])
-def tagPost(tag_id):
-    tagPost = Post.query.filter_by(id = tag_id).first()
-    tagPost.tags.append(tag_id)
-    db.session.add(tagPost)
-    db.session.commit()
-    return redirect(url_for('routes.index'))
 
 
-@bp_routes.route('/postTags/<post_id>', methods=['GET'])
-def postTags(post_id):
-    post = Post.query.filter_by(id = post_id).first()
-    return render_template('postTags.html', post=post)
+
