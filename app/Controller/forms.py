@@ -14,3 +14,7 @@ class PostForm(FlaskForm):
     happiness_level = SelectField('Happiness Level',choices = [(3, 'I can\'t stop smiling'), (2, 'Really happy'), (1,'Happy')])
     tag = QuerySelectMultipleField('Tags', query_factory=lambda: Tag.query.all(), get_label=lambda x: x.name, widget=ListWidget(prefix_label=False), option_widget=CheckboxInput())
     submit = SubmitField('Post')
+
+class SortForm(FlaskForm):
+    sort = SelectField('Sort',choices = [(1,'Date'), (2,'Title'), (3,'Happiness Level'), (4,'# of likes')])
+    submit = SubmitField('Refresh')

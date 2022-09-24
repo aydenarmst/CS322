@@ -1,4 +1,5 @@
 from __future__ import print_function
+from pprint import pformat
 import sys
 from flask import Blueprint
 from flask import render_template, flash, redirect, url_for, request
@@ -6,17 +7,29 @@ from config import Config
 
 from app import db
 from app.Model.models import Post, Tag, postTags
-from app.Controller.forms import PostForm
+from app.Controller.forms import PostForm, SortForm
 
 bp_routes = Blueprint('routes', __name__)
 bp_routes.template_folder = Config.TEMPLATE_FOLDER #'..\\View\\templates'
 
 
-@bp_routes.route('/', methods=['GET'])
-@bp_routes.route('/index', methods=['GET'])
+@bp_routes.route('/', methods=['GET', 'POST'])
+@bp_routes.route('/index', methods=['GET','POST'])
 def index():
+    pform = SortForm()
     posts = Post.query.order_by(Post.timestamp.desc())
-    return render_template('index.html', title="Smile Portal", postCount = posts.count(), posts=posts.all())
+    if pform.is_submitted():
+        if (pform.sort.data == '1'):
+            posts = Post.query.order_by(Post.timestamp.desc())
+        elif (pform.sort.data == '2'):
+            posts = Post.query.order_by(Post.title.desc())
+        elif (pform.sort.data == '3'):
+            posts = Post.query.order_by(Post.happiness_level.desc())
+        elif (pform.sort.data == '4'):
+            posts = Post.query.order_by(Post.likes.desc())
+    else:
+        posts = Post.query.order_by(Post.timestamp.desc())
+    return render_template('index.html', title="Smile Portal",postCount = posts.count(),posts = posts.all(), form = pform)
 
 
 @bp_routes.route('/postsmile/', methods=['GET', 'POST'])
