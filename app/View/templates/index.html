@@ -13,7 +13,7 @@
         {{ form.hidden_tag() }}
         <p>{{ form.sort.label }} {{ form.sort(class="formselect") }}</p>
         <p>{{ form.submit(class="button") }}</p>
- 
+    </form>
     <!--     TODO: (milestone 2) Format posts -->
     <div class = "postlist">
         {% for post in posts %}
@@ -22,7 +22,7 @@
         </div>
         {% endfor %}
     </div>
-</form>
+
 
 
     
