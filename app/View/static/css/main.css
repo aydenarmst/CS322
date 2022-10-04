@@ -177,3 +177,54 @@ a:hover {
     color: crimson; 
     text-transform: uppercase;
 }
+
+.refreshButton{
+    background-color: #3F51B5;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    width:10%;
+}
+
+.container{
+    display: block;
+}
+
+.container input{
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark{
+    height: 14px;
+    width: 14px;
+    background-color: #eee;
+}
+
+.container:hover input ~ .checkmark{
+    background-color: #ccc;
+}
+
+.checkmark:after{
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.container input:checked ~ .checkmark:after{
+    display: block;
+}
+
+.container .checkmark:after{
+    left: 5px;
+    top: 1px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}

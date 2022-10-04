@@ -31,6 +31,8 @@ def index():
             posts = Post.query.order_by(Post.likes.desc())
     else:
         posts = Post.query.order_by(Post.timestamp.desc())
+    if pform.sortByUser.data:
+        posts = posts.filter_by(user_id=current_user.id)
     return render_template('index.html', title='Smile Portal',postCount = posts.count(),posts = posts.all(), form = pform)
 
 
