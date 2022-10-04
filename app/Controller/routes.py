@@ -4,6 +4,7 @@ import sys
 from flask import Blueprint
 from flask import render_template, flash, redirect, url_for, request
 from config import Config
+from flask_login import login_required, current_user
 
 from app import db
 from app.Model.models import Post, Tag, postTags
@@ -15,6 +16,7 @@ bp_routes.template_folder = Config.TEMPLATE_FOLDER #'..\\View\\templates'
 
 @bp_routes.route('/', methods=['GET', 'POST'])
 @bp_routes.route('/index', methods=['GET','POST'])
+@login_required
 def index():
     pform = SortForm()
     posts = Post.query.order_by(Post.timestamp.desc())
@@ -29,10 +31,11 @@ def index():
             posts = Post.query.order_by(Post.likes.desc())
     else:
         posts = Post.query.order_by(Post.timestamp.desc())
-    return render_template('index.html', title="Smile Portal",postCount = posts.count(),posts = posts.all(), form = pform)
+    return render_template('index.html', title='Smile Portal',postCount = posts.count(),posts = posts.all(), form = pform)
 
 
 @bp_routes.route('/postsmile/', methods=['GET', 'POST'])
+@login_required
 def postsmile():
     pform = PostForm()
     if pform.validate_on_submit():
@@ -49,6 +52,7 @@ def postsmile():
 
 
 @bp_routes.route('/like/<post_id>', methods=['POST'])
+@login_required
 def like(post_id):
     incrementLikes = Post.query.filter_by(id = post_id).first()
     incrementLikes.likes += 1
