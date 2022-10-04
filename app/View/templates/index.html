@@ -12,7 +12,7 @@
     <form action="" method="POST">
         {{ form.hidden_tag() }}
         <p>{{ form.sort.label }} {{ form.sort(class="formselect") }}</p>
-        <p>{{ form.sortByUser(class="checkbox") }} {{ form.sortByUser.label }}</p>
+        <p>{{ form.sortByUser }} {{ form.sortByUser.label }}</p>
         <p>{{ form.submit(class="refreshButton") }}</p>
     </form>
     <!--     TODO: (milestone 2) Format posts -->

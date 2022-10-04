@@ -1,4 +1,5 @@
 from datetime import datetime
+from operator import truediv
 from werkzeug.security import generate_password_hash, check_password_hash
 from enum import unique
 from app import db
@@ -7,9 +8,11 @@ from app import login
 
 
 
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
 
-
-postTags = db.Table('postTags',
+postTags = db.Table('post_tags',
     db.Column('post_id', db.Integer, db.ForeignKey('post.id')),
     db.Column('tag_id',db.Integer, db.ForeignKey('tag.id'))
 )
@@ -53,11 +56,11 @@ class Tag(db.Model):
 
 class User(UserMixin,db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    username = db.Column(db.String(64), unique=True, index = True)
-    email = db.Column(db.String(120), unique=True, index = True)
+    username = db.Column(db.String(64), unique=True)
+    email = db.Column(db.String(120), unique=True)
     password_hash = db.Column(db.String(128))
 
-    posts = db.relationship('Post', backref='writer')
+    posts = db.relationship('Post', backref='writer', lazy='dynamic')
 
     def get_user_posts(self):
         return self.posts
@@ -72,7 +75,5 @@ class User(UserMixin,db.Model):
         return check_password_hash(self.password_hash, password)
 
 
-@login.user_loader
-def load_user(id):
-    return User.query.get(int(id))
+
 

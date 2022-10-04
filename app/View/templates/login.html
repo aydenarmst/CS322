@@ -6,13 +6,18 @@
     {% if form %}
         <form action="" method="POST">
             {{ form.hidden_tag() }}
+
             <p>{{ form.username.label }}</p>
             <p>{{ form.username(class = 'formInput') }}</p>
+
             {% for error in form.username.errors %}
                 <span style = "color: red"> [{{ error }}] </span>
             {% endfor %}
+
+            
             <p>{{ form.password.label }}</p>
             <p>{{ form.password(class = 'formInput') }}</p>
+
             {% for errors in form.password.errors %}
                 <span style="color: red">[{{ error }}] </span>
             {% endfor %}

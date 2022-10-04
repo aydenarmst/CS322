@@ -31,6 +31,8 @@ def index():
             posts = Post.query.order_by(Post.likes.desc())
     else:
         posts = Post.query.order_by(Post.timestamp.desc())
+
+
     if pform.sortByUser.data:
         posts = posts.filter_by(user_id=current_user.id)
     return render_template('index.html', title='Smile Portal',postCount = posts.count(),posts = posts.all(), form = pform)
@@ -63,6 +65,23 @@ def like(post_id):
     return redirect(url_for('routes.index'))
 
 
+#If the post is found, it should remove all the tags for that post.(Hint: in a for loop iterate over all tags of the post and remove them: thepost.tags.remove(t) where thepost is the post that will be deleted and t is a tag in thepost.tags) You should commit after you remove the tags of the post. You will get a SQLAlchemy error if you fail to commit.
+#Delete the post and commit. (Hint: db.session.delete(thepost))
+#You can issue flash messages when the post is succesfully deleted.
+#After the post is deleted, the page should be redirected to routes.index'.
+@bp_routes.route('/delete/<post_id>', methods=['DELETE','POST'])
+@login_required
+def delete(post_id):
+    thepost = Post.query.filter_by(id = post_id).first()
+    if thepost is not None:
+        for t in thepost.tags:
+            thepost.tags.remove(t)
+        db.session.add(thepost)
+        db.session.commit()
+        db.session.delete(thepost)
+        db.session.commit()
+        flash("Post " + thepost.title + " is deleted")
+    return redirect(url_for('routes.index'))
 
 
 

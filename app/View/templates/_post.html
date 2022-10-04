@@ -47,6 +47,11 @@
                  <!-- (milestone3) TODO: if the post is posted by the logged in user, include the "delete" button.  
                                    Define an HTML `post` form with a submit button. The form action should redirect to `routes.deletepost` route.
                                    Style the submit button using `button` CCS class selector. -->
+                {% if post.writer == current_user %}
+                    <form action = "{{ url_for('routes.delete', post_id = post.id )}}" method = "POST">
+                        <input type="submit" class = "buttonDel" value="Delete">
+                    </form>
+                {% endif %}
 
             </td>
         </tr>
