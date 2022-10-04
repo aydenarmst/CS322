@@ -169,3 +169,11 @@ a:hover {
     font-size: 18px;
     width: 400px;
 }
+
+.userItem{
+    text-align: center;
+    padding: 3px;
+    margin: 4px 3px 4px 3px;
+    color: crimson; 
+    text-transform: uppercase;
+}

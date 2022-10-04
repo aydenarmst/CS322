@@ -39,7 +39,7 @@ def index():
 def postsmile():
     pform = PostForm()
     if pform.validate_on_submit():
-        newPost = Post(title = pform.title.data, body = pform.body.data, happiness_level = pform.happiness_level.data, tags = pform.tag.data)
+        newPost = Post(title = pform.title.data, body = pform.body.data, happiness_level = pform.happiness_level.data, tags = pform.tag.data, user_id = current_user.id)
         allTags = Tag.query.all()
         for t in allTags:
             if t in pform.tag.data:
