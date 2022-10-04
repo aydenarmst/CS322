@@ -162,3 +162,10 @@ a:hover {
         width: 32%;
     }
 }
+
+.formInput {
+    padding: 2px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 18px;
+    width: 400px;
+}

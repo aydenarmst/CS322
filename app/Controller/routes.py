@@ -50,7 +50,6 @@ def postsmile():
 
 @bp_routes.route('/like/<post_id>', methods=['POST'])
 def like(post_id):
-    print("The post id",post_id)
     incrementLikes = Post.query.filter_by(id = post_id).first()
     incrementLikes.likes += 1
     db.session.add(incrementLikes)
